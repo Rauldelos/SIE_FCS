@@ -1,0 +1,155 @@
+services:
+  # ERP: Odoo v17
+  odoo:
+    image: odoo:17.0
+    container_name: sie_odoo
+    ports:
+      - "8069:8069"
+    volumes:
+      - ./odoo/addons:/mnt/extra-addons
+      - ./odoo/config:/etc/odoo
+      - odoo-web-data:/var/lib/odoo
+    depends_on:
+      - db_odoo
+    environment:
+      - HOST=db_odoo
+      - USER=odoo
+      - PASSWORD=odoo_pass
+
+  db_odoo:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=odoo_pass
+      - POSTGRES_USER=odoo
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data
+
+  # CRM: SuiteCRM v8
+  suitecrm:
+    build:
+      context: ./suitecrm
+      dockerfile: Dockerfile
+    container_name: sie_suitecrm
+    ports:
+      - "8080:80"
+    volumes:
+      - ./suitecrm/upload:/var/www/html/public/legacy/upload
+      - suitecrm-data:/var/www/html
+    depends_on:
+      - db_suitecrm
+    environment:
+      - DATABASE_HOST=db_suitecrm
+      - DATABASE_NAME=suitecrm_db
+      - DATABASE_USER=suitecrm_user
+      - DATABASE_PASSWORD=suitecrm_pass
+    entrypoint: >
+      sh -c "chown -R www-data:www-data /var/www/html/cache /var/www/html/custom /var/www/html/logs /var/www/html/public/legacy/upload 2>/dev/null || true &&
+            chmod -R 775 /var/www/html/cache /var/www/html/custom /var/www/html/logs /var/www/html/public/legacy/upload 2>/dev/null || true &&
+            apache2-foreground"
+
+
+  db_suitecrm:
+    image: mariadb:10.11
+    environment:
+      - MARIADB_DATABASE=suitecrm_db
+      - MARIADB_USER=suitecrm_user
+      - MARIADB_PASSWORD=suitecrm_pass
+      - MARIADB_ROOT_PASSWORD=root_pass
+    volumes:
+      - suitecrm-db-data:/var/lib/mysql
+
+  # BPM: Bonita Runtime 2023.2 con PostgreSQL
+  bonita:
+    image: bonita:2023.2
+    container_name: sie_bonita
+    ports:
+      - "8081:8080"
+    environment:
+      - DB_VENDOR=postgres
+      - DB_HOST=db_bonita
+      - DB_PORT=5432
+      - DB_NAME=bonita
+      - DB_USER=bonita
+      - DB_PASS=bpm
+      - BIZ_DB_NAME=business_data
+      - BIZ_DB_USER=business_data
+      - BIZ_DB_PASS=bpm
+    restart: on-failure:2
+    depends_on:
+      db_bonita:
+        # It uses the HEALTHCHECK of the database Docker image
+        condition: service_healthy
+    volumes:
+      - bonita-data:/opt/bonita
+
+  db_bonita:
+    image: bonitasoft/bonita-postgres:15.4
+    environment:
+      POSTGRES_PASSWORD: my-secret-pw
+    restart: always
+    # Uncomment those lines to mount a volume with your dumps
+    #volumes:
+    #  - ~/my/test/dumps:/opt/bonita/dump
+    
+    #environment:
+    #  - POSTGRES_DB=bonita
+    #  - POSTGRES_USER=bonita
+    #  - POSTGRES_PASSWORD=bonita
+    volumes:
+      - bonita-db-data:/var/lib/postgresql/data
+
+  # Automatización: n8n
+  n8n:
+    image: n8nio/n8n:1
+    container_name: sie_n8n
+    ports:
+      - "5678:5678"
+    volumes:
+      - n8n-data:/home/node/.n8n
+
+  # Email Fake Server: smtp4dev
+  smtp4dev:
+    image: rnwood/smtp4dev:v3
+    container_name: sie_smtp4dev
+    ports:
+      - "3000:80"     # Panel Web para ver correos
+      - "2525:25"     # Puerto SMTP para herramientas externas (Bonita Studio)
+    volumes:
+      - smtp4dev-data:/smtp4dev
+    restart: always
+
+  # Gestión BD: pgAdmin 4 (para Odoo/PostgreSQL y Bonita/PostgreSQL)
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: sie_pgadmin
+    ports:
+      - "5050:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@sie.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+
+  # Gestión BD: phpMyAdmin (para SuiteCRM/MariaDB)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: sie_phpmyadmin
+    ports:
+      - "8088:80"
+    environment:
+      - PMA_HOST=db_suitecrm
+      - PMA_PORT=3306
+      - UPLOAD_LIMIT=64M
+    restart: always
+
+volumes:
+  odoo-web-data:
+  odoo-db-data:
+  suitecrm-data:
+  suitecrm-db-data:
+  bonita-data:
+  bonita-db-data:
+  n8n-data:
+  smtp4dev-data:
+  pgadmin-data:

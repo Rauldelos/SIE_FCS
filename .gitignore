@@ -1,0 +1,19 @@
+# Datos de persistencia de Docker (Volúmenes locales)
+odoo-web-data/
+odoo-db-data/
+suitecrm-data/
+suitecrm-db-data/
+bonita-data/
+bonita-db-data/
+n8n-data/
+smtp4dev-data/
+pgadmin-data/
+
+# Archivos de sistema y logs
+*.log
+.DS_Store
+Thumbs.db
+
+# Temporales de SuiteCRM si se mapean
+suitecrm/SuiteCRM-8.9.1/cache/
+suitecrm/SuiteCRM-8.9.1/upload/
