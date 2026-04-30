@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="vehicle_furgoneta_1" model="fcs.delivery.vehicle">
+            <field name="name">Furgoneta 1</field>
+            <field name="capacity">5</field>
+            <field name="available">True</field>
+        </record>
+        <record id="vehicle_furgoneta_2" model="fcs.delivery.vehicle">
+            <field name="name">Furgoneta 2</field>
+            <field name="capacity">7</field>
+            <field name="available">True</field>
+        </record>
+    </data>
+</odoo>

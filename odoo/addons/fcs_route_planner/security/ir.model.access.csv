@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_fcs_delivery_zone_user,fcs.delivery.zone user,model_fcs_delivery_zone,base.group_user,1,1,1,1
+access_fcs_delivery_vehicle_user,fcs.delivery.vehicle user,model_fcs_delivery_vehicle,base.group_user,1,1,1,1
+access_fcs_funeral_home_user,fcs.funeral.home user,model_fcs_funeral_home,base.group_user,1,1,1,1
+access_fcs_delivery_order_user,fcs.delivery.order user,model_fcs_delivery_order,base.group_user,1,1,1,1
+access_fcs_delivery_order_line_user,fcs.delivery.order.line user,model_fcs_delivery_order_line,base.group_user,1,1,1,1
+access_fcs_delivery_route_user,fcs.delivery.route user,model_fcs_delivery_route,base.group_user,1,1,1,1
+access_fcs_delivery_route_line_user,fcs.delivery.route.line user,model_fcs_delivery_route_line,base.group_user,1,1,1,1
+access_fcs_route_planning_wizard_user,fcs.route.planning.wizard user,model_fcs_route_planning_wizard,base.group_user,1,1,1,1

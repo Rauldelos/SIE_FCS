@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="funeral_home_se30" model="fcs.funeral.home">
+            <field name="name">Tanatorio SE-30</field>
+            <field name="zone_id" ref="zone_nervion"/>
+            <field name="address">Calle Doctor Pedro de Castro, Sevilla</field>
+        </record>
+        <record id="funeral_home_san_jeronimo" model="fcs.funeral.home">
+            <field name="name">Tanatorio San Jerónimo</field>
+            <field name="zone_id" ref="zone_san_jeronimo"/>
+            <field name="address">San Jerónimo, Sevilla</field>
+        </record>
+        <record id="funeral_home_palmete" model="fcs.funeral.home">
+            <field name="name">Tanatorio Palmete</field>
+            <field name="zone_id" ref="zone_palmete"/>
+            <field name="address">Palmete, Sevilla</field>
+        </record>
+        <record id="funeral_home_dos_hermanas" model="fcs.funeral.home">
+            <field name="name">Tanatorio Dos Hermanas</field>
+            <field name="zone_id" ref="zone_dos_hermanas"/>
+            <field name="address">Dos Hermanas, Sevilla</field>
+        </record>
+        <record id="funeral_home_alcala_guadaira" model="fcs.funeral.home">
+            <field name="name">Tanatorio Alcalá de Guadaíra</field>
+            <field name="zone_id" ref="zone_alcala_guadaira"/>
+            <field name="address">Alcalá de Guadaíra, Sevilla</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_fcs_route_root" name="FCS Rutas" sequence="10"/>
+    <menuitem id="menu_fcs_delivery_order" name="Pedidos" parent="menu_fcs_route_root" action="action_fcs_delivery_order" sequence="10"/>
+    <menuitem id="menu_fcs_delivery_route" name="Rutas planificadas" parent="menu_fcs_route_root" action="action_fcs_delivery_route" sequence="20"/>
+    <menuitem id="menu_fcs_delivery_vehicle" name="Vehículos" parent="menu_fcs_route_root" action="action_fcs_delivery_vehicle" sequence="30"/>
+    <menuitem id="menu_fcs_delivery_zone" name="Zonas" parent="menu_fcs_route_root" action="action_fcs_delivery_zone" sequence="40"/>
+    <menuitem id="menu_fcs_funeral_home" name="Tanatorios" parent="menu_fcs_route_root" action="action_fcs_funeral_home" sequence="50"/>
+    <menuitem id="menu_fcs_route_planning_wizard" name="Planificar rutas" parent="menu_fcs_route_root" action="action_fcs_route_planning_wizard" sequence="60"/>
+</odoo>

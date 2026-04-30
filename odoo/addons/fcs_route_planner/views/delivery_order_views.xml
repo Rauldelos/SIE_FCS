@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_fcs_delivery_order_tree" model="ir.ui.view">
+        <field name="name">fcs.delivery.order.tree</field>
+        <field name="model">fcs.delivery.order</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="customer_name"/>
+                <field name="delivery_type"/>
+                <field name="zone_id"/>
+                <field name="delivery_address"/>
+                <field name="order_time"/>
+                <field name="deadline_datetime"/>
+                <field name="urgency_score"/>
+                <field name="estimated_delivery_datetime"/>
+                <field name="estimated_delay_minutes"/>
+                <field name="state"/>
+                <field name="vehicle_id"/>
+                <field name="route_id"/>
+                <field name="route_order"/>
+                <field name="total_items"/>
+                <field name="estimated_km"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_fcs_delivery_order_form" model="ir.ui.view">
+        <field name="name">fcs.delivery.order.form</field>
+        <field name="model">fcs.delivery.order</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="pending,planned,delivered,cancelled"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="customer_name"/>
+                            <field name="order_time"/>
+                            <field name="deadline_datetime"/>
+                            <field name="total_items"/>
+                        </group>
+                        <group>
+                            <field name="delivery_type"/>
+                            <field name="funeral_home_id" invisible="delivery_type != 'funeral_home'" required="delivery_type == 'funeral_home'"/>
+                            <field name="home_address" invisible="delivery_type != 'home'" required="delivery_type == 'home'"/>
+                            <field name="zone_id"/>
+                            <field name="delivery_address" readonly="1"/>
+                            <field name="estimated_km"/>
+                            <field name="urgency_score"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Arreglos florales">
+                            <field name="line_ids">
+                                <tree editable="bottom">
+                                    <field name="flower_type"/>
+                                    <field name="quantity"/>
+                                    <field name="notes"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    <group string="Ruta asignada">
+                        <field name="vehicle_id"/>
+                        <field name="route_id"/>
+                        <field name="route_order"/>
+                        <field name="estimated_delivery_datetime"/>
+                        <field name="estimated_delay_minutes"/>
+                    </group>
+                    <group>
+                        <field name="notes" placeholder="Notas del pedido"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_fcs_delivery_order" model="ir.actions.act_window">
+        <field name="name">Pedidos</field>
+        <field name="res_model">fcs.delivery.order</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

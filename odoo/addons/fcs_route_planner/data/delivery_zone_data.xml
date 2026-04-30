@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="zone_nervion" model="fcs.delivery.zone">
+            <field name="name">Nervión</field>
+            <field name="distance_km">3</field>
+        </record>
+        <record id="zone_palmete" model="fcs.delivery.zone">
+            <field name="name">Palmete / Palmetillo</field>
+            <field name="distance_km">5</field>
+        </record>
+        <record id="zone_san_jeronimo" model="fcs.delivery.zone">
+            <field name="name">San Jerónimo</field>
+            <field name="distance_km">9</field>
+        </record>
+        <record id="zone_camas" model="fcs.delivery.zone">
+            <field name="name">Camas</field>
+            <field name="distance_km">9</field>
+        </record>
+        <record id="zone_san_juan_aznalfarache" model="fcs.delivery.zone">
+            <field name="name">San Juan de Aznalfarache</field>
+            <field name="distance_km">9</field>
+        </record>
+        <record id="zone_tomares" model="fcs.delivery.zone">
+            <field name="name">Tomares</field>
+            <field name="distance_km">10</field>
+        </record>
+        <record id="zone_castilleja_cuesta" model="fcs.delivery.zone">
+            <field name="name">Castilleja de la Cuesta</field>
+            <field name="distance_km">10</field>
+        </record>
+        <record id="zone_bormujos" model="fcs.delivery.zone">
+            <field name="name">Bormujos</field>
+            <field name="distance_km">12</field>
+        </record>
+        <record id="zone_gines" model="fcs.delivery.zone">
+            <field name="name">Gines</field>
+            <field name="distance_km">13</field>
+        </record>
+        <record id="zone_mairena_aljarafe" model="fcs.delivery.zone">
+            <field name="name">Mairena del Aljarafe</field>
+            <field name="distance_km">13</field>
+        </record>
+        <record id="zone_gelves" model="fcs.delivery.zone">
+            <field name="name">Gelves</field>
+            <field name="distance_km">13</field>
+        </record>
+        <record id="zone_la_rinconada" model="fcs.delivery.zone">
+            <field name="name">La Rinconada</field>
+            <field name="distance_km">15</field>
+        </record>
+        <record id="zone_dos_hermanas" model="fcs.delivery.zone">
+            <field name="name">Dos Hermanas</field>
+            <field name="distance_km">15</field>
+        </record>
+        <record id="zone_santiponce" model="fcs.delivery.zone">
+            <field name="name">Santiponce</field>
+            <field name="distance_km">16</field>
+        </record>
+        <record id="zone_alcala_guadaira" model="fcs.delivery.zone">
+            <field name="name">Alcalá de Guadaíra</field>
+            <field name="distance_km">17</field>
+        </record>
+        <record id="zone_coria_rio" model="fcs.delivery.zone">
+            <field name="name">Coria del Río</field>
+            <field name="distance_km">18</field>
+        </record>
+        <record id="zone_valencina_concepcion" model="fcs.delivery.zone">
+            <field name="name">Valencina de la Concepción</field>
+            <field name="distance_km">18</field>
+        </record>
+        <record id="zone_espartinas" model="fcs.delivery.zone">
+            <field name="name">Espartinas</field>
+            <field name="distance_km">20</field>
+        </record>
+        <record id="zone_la_algaba" model="fcs.delivery.zone">
+            <field name="name">La Algaba</field>
+            <field name="distance_km">20</field>
+        </record>
+        <record id="zone_bollullos_mitacion" model="fcs.delivery.zone">
+            <field name="name">Bollullos de la Mitación</field>
+            <field name="distance_km">22</field>
+        </record>
+        <record id="zone_brenes" model="fcs.delivery.zone">
+            <field name="name">Brenes</field>
+            <field name="distance_km">23</field>
+        </record>
+        <record id="zone_guillena" model="fcs.delivery.zone">
+            <field name="name">Guillena</field>
+            <field name="distance_km">25</field>
+        </record>
+        <record id="zone_los_palacios_villafranca" model="fcs.delivery.zone">
+            <field name="name">Los Palacios y Villafranca</field>
+            <field name="distance_km">27</field>
+        </record>
+        <record id="zone_utrera" model="fcs.delivery.zone">
+            <field name="name">Utrera</field>
+            <field name="distance_km">29</field>
+        </record>
+        <record id="zone_carmona" model="fcs.delivery.zone">
+            <field name="name">Carmona</field>
+            <field name="distance_km">30</field>
+        </record>
+    </data>
+</odoo>

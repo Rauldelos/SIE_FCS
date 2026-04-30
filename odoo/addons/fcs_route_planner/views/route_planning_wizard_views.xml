@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_fcs_route_planning_wizard_form" model="ir.ui.view">
+        <field name="name">fcs.route.planning.wizard.form</field>
+        <field name="model">fcs.route.planning.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Planificar rutas">
+                <sheet>
+                    <group>
+                        <field name="planning_datetime"/>
+                        <field name="base_address"/>
+                        <field name="max_delivery_hours"/>
+                        <field name="allow_reasonable_detours"/>
+                        <field name="include_pending_only"/>
+                        <field name="notes"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_plan_routes" string="Planificar" type="object" class="btn-primary"/>
+                    <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_fcs_route_planning_wizard" model="ir.actions.act_window">
+        <field name="name">Planificar rutas</field>
+        <field name="res_model">fcs.route.planning.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_fcs_route_planning_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

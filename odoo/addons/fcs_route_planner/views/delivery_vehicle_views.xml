@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_fcs_delivery_vehicle_tree" model="ir.ui.view">
+        <field name="name">fcs.delivery.vehicle.tree</field>
+        <field name="model">fcs.delivery.vehicle</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="license_plate"/>
+                <field name="driver_name"/>
+                <field name="capacity"/>
+                <field name="available"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_fcs_delivery_vehicle_form" model="ir.ui.view">
+        <field name="name">fcs.delivery.vehicle.form</field>
+        <field name="model">fcs.delivery.vehicle</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="license_plate"/>
+                            <field name="driver_name"/>
+                        </group>
+                        <group>
+                            <field name="capacity"/>
+                            <field name="available"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_fcs_delivery_vehicle" model="ir.actions.act_window">
+        <field name="name">Vehículos</field>
+        <field name="res_model">fcs.delivery.vehicle</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
