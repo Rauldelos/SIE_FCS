@@ -24,6 +24,11 @@ class FcsDeliveryOrderLine(models.Model):
         required=True,
         string='Tipo de arreglo floral',
     )
+    product_id = fields.Many2one(
+        'product.product',
+        string='Producto Odoo',
+        help='Producto o kit de Odoo usado para comprobar y consumir stock.',
+    )
     quantity = fields.Integer(required=True, default=1, string='Cantidad')
     notes = fields.Text(string='Notas')
 

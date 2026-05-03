@@ -15,7 +15,10 @@ class FcsRoutePlanningWizard(models.TransientModel):
 
     max_orders_per_vehicle = fields.Integer(default=5, string='Máximo de pedidos por vehículo')
     planning_datetime = fields.Datetime(default=fields.Datetime.now, string='Fecha de planificación')
-    include_pending_only = fields.Boolean(default=True, string='Solo pedidos pendientes')
+    include_pending_only = fields.Boolean(
+        default=True,
+        string='Solo pedidos preparados pendientes de ruta',
+    )
     max_delivery_hours = fields.Float(default=3.0, string='Horas máximas de entrega')
     average_speed_kmh = fields.Float(default=35.0, string='Velocidad media (km/h)')
     allow_reasonable_detours = fields.Boolean(default=True, string='Permitir desvíos razonables')
@@ -90,7 +93,10 @@ class FcsRoutePlanningWizard(models.TransientModel):
 
     def _get_order_domain(self):
         if self.include_pending_only:
-            return [('state', '=', 'pending')]
+            return [
+                ('state', '=', 'prepared'),
+                ('route_id', '=', False),
+            ]
         return [
             ('state', 'not in', ['delivered', 'cancelled']),
             ('route_id', '=', False),

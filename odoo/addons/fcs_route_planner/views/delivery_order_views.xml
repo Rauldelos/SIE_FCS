@@ -31,7 +31,7 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <field name="state" widget="statusbar" statusbar_visible="pending,planned,delivered,cancelled"/>
+                    <field name="state" widget="statusbar" statusbar_visible="pending,prepared,planned,delivered,cancelled"/>
                 </header>
                 <sheet>
                     <group>
@@ -57,6 +57,7 @@
                             <field name="line_ids">
                                 <tree editable="bottom">
                                     <field name="flower_type"/>
+                                    <field name="product_id"/>
                                     <field name="quantity"/>
                                     <field name="notes"/>
                                 </tree>
@@ -69,6 +70,10 @@
                         <field name="route_order"/>
                         <field name="estimated_delivery_datetime"/>
                         <field name="estimated_delay_minutes"/>
+                    </group>
+                    <group string="Stock">
+                        <field name="stock_consumed"/>
+                        <field name="stock_move_ids" widget="many2many_tags"/>
                     </group>
                     <group>
                         <field name="notes" placeholder="Notas del pedido"/>

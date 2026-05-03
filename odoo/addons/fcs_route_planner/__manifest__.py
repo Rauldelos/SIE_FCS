@@ -4,7 +4,7 @@
     'summary': 'Planificador de rutas de reparto para FCS Flores Cristo de la Sed',
     'author': 'FCS',
     'category': 'Operations/Delivery',
-    'depends': ['base', 'mail', 'web'],
+    'depends': ['base', 'mail', 'web', 'control_stock'],
     'data': [
         'security/ir.model.access.csv',
         'data/delivery_zone_data.xml',

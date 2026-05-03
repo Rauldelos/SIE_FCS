@@ -68,6 +68,7 @@ class FcsDeliveryOrder(models.Model):
     state = fields.Selection(
         [
             ('pending', 'Pendiente'),
+            ('prepared', 'Preparado'),
             ('planned', 'Planificado'),
             ('delivered', 'Entregado'),
             ('cancelled', 'Cancelado'),
@@ -98,6 +99,15 @@ class FcsDeliveryOrder(models.Model):
         string='Prioridad',
     )
     notes = fields.Text()
+    stock_consumed = fields.Boolean(
+        readonly=True,
+        string='Stock consumido',
+    )
+    stock_move_ids = fields.Many2many(
+        'stock.move',
+        readonly=True,
+        string='Movimientos de stock',
+    )
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -211,3 +221,37 @@ class FcsDeliveryOrder(models.Model):
         delivery_hours = max(max_delivery_hours or 3.0, 0.01)
         urgency_ratio = min(max(elapsed_hours / delivery_hours, 0.0), 1.5)
         return urgency_ratio * 100.0
+
+    def check_fcs_order_stock(self):
+        self.ensure_one()
+        return self.env['fcs.stock.integration.service'].check_fcs_order_stock(self)
+
+    def action_confirm_preparation_from_bonita(self):
+        self.ensure_one()
+        stock_result = self.check_fcs_order_stock()
+        if not stock_result['stock_ok'] and not self.stock_consumed:
+            return {
+                'success': False,
+                'stock_ok': False,
+                'missing_items': stock_result['missing_items'],
+                'state': self.state,
+            }
+
+        consume_result = self.env['fcs.stock.integration.service'].consume_fcs_order_stock(self)
+        if not consume_result.get('success'):
+            return {
+                'success': False,
+                'stock_ok': False,
+                'missing_items': consume_result.get('missing_items', []),
+                'state': self.state,
+            }
+
+        self.write({'state': 'prepared'})
+        return {
+            'success': True,
+            'stock_ok': True,
+            'missing_items': [],
+            'state': self.state,
+            'stock_consumed': self.stock_consumed,
+            'stock_move_ids': self.stock_move_ids.ids,
+        }
